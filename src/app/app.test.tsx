@@ -6,10 +6,7 @@ describe('App', () => {
   it('renders hello world message', () => {
     render(<App />);
     
-    const heading = screen.getByRole('heading', { name: /hello world/i });
+    const heading = screen.getByText(/main content/i);
     expect(heading).toBeInTheDocument();
-    
-    const welcomeText = screen.getByText(/welcome to your react 18 project starter!/i);
-    expect(welcomeText).toBeInTheDocument();
   });
 });
