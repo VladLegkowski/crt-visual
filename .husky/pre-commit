@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
+. "$(dirname "$0")/_/h"
 
-# Run TypeScript type-check project-wide first
-# This is done outside lint-staged to avoid TS17004 and TS1056 errors
-# that occur when tsc ignores tsconfig.json when files are passed directly
-echo "Running TypeScript type-check..."
-npx tsc --noEmit || exit 1
+# Pre-push hook: Run all quality checks before pushing
+# This ensures no broken code is pushed to the remote repository
+# and helps guarantee Jenkins pipeline builds go green
 
-# Run lint-staged for ESLint, Prettier, and related tests
-echo "Running lint-staged..."
-npx lint-staged
+echo "Running all quality checks (typecheck, lint, test, e2e)..."
+npm run check:all || exit 1
+
+echo "All checks passed! Pushing..."
