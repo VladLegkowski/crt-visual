@@ -109,10 +109,6 @@ e2e/
 └── pre-push         # Pre-push git hook
 ```
 
-## Configuration
-
-The project uses the same linting, formatting, and testing setup as the FIFA web-player project, ensuring consistency and best practices.
-
 ### Git Hooks
 
 - **Pre-commit**: Runs TypeScript type checking and lint-staged (ESLint, Prettier, related tests)
