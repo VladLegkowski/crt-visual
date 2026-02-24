@@ -31,13 +31,14 @@ export function LayerNode(props: LayerNodeProps) {
   const handleStyles: CSSProperties = {
     position: 'absolute',
     top: '50%',
-    right: -7,
+    left: -7,
     transform: 'translateY(-50%)',
     width: 12,
     height: 12,
     border: '2px solid #ccc',
     borderRadius: 999,
     boxSizing: 'border-box',
+    background: '#fff',
   };
 
   return (

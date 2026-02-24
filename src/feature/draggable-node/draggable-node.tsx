@@ -1,4 +1,5 @@
-import { CSSProperties, DragEvent, ReactNode, SetStateAction } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import type { DragEvent as ReactDragEvent } from 'react';
 import { useDnD } from '../../shared/context/dnd-context';
 
 type DraggableNodeProps = {
@@ -9,21 +10,17 @@ type DraggableNodeProps = {
 function DraggableNode(props: DraggableNodeProps) {
   const { children, type } = props;
   const { setType } = useDnD();
-  
-  const draggableNodeStyles: CSSProperties = {
-    cursor: 'grab'
-  };
 
-  const onDragStart = (
-    event: DragEvent<HTMLDivElement>,
-    nodeType: SetStateAction<string | null>
-  ) => {
-    setType(nodeType);
+  const draggableNodeStyles: CSSProperties = { cursor: 'grab' };
+
+  const onDragStart = (event: ReactDragEvent<HTMLDivElement>) => {
+    setType(type);
+    event.dataTransfer.setData('application/reactflow', type);
     event.dataTransfer.effectAllowed = 'move';
   };
 
   return (
-    <div style={draggableNodeStyles} onDragStart={(event) => onDragStart(event, type)} draggable>
+    <div style={draggableNodeStyles} draggable onDragStart={onDragStart}>
       {children}
     </div>
   );

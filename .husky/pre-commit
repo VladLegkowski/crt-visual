@@ -1,11 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/h"
-
-# Pre-push hook: Run all quality checks before pushing
-# This ensures no broken code is pushed to the remote repository
-# and helps guarantee Jenkins pipeline builds go green
-
 echo "Running all quality checks (typecheck, lint, test, e2e)..."
 npm run check:all || exit 1
-
 echo "All checks passed! Pushing..."

@@ -1,17 +1,14 @@
-import { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
+import { Handle, type NodeProps, Position } from '@xyflow/react';
 
-type SourceNodeProps = {
-  children: ReactNode;
-};
-
-function SourceNode(props: SourceNodeProps) {
-  const { children } = props;
-
+function SourceFlowNode(props: NodeProps) {
+  const { selected } = props;
+  console.log(props);
   const nodeStyles: CSSProperties = {
     position: 'relative',
     width: 160,
     minHeight: 70,
-    border: '2px solid #ccc',
+    border: `2px solid ${selected ? '#ff0072' : '#ccc'}`,
     borderRadius: 10,
     boxSizing: 'border-box',
     padding: 10,
@@ -36,30 +33,22 @@ function SourceNode(props: SourceNodeProps) {
   };
 
   const handleStyles: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    right: -7,
-    transform: 'translateY(-50%)',
     width: 12,
     height: 12,
-    border: '2px solid #ccc',
+    border: `2px solid ${selected ? '#ff0072' : '#ccc'}`,
     borderRadius: 999,
-    boxSizing: 'border-box',
+    background: '#fff',
   };
 
   return (
-    <article
-      className="react-flow__node react-flow__node-source"
-      style={nodeStyles}
-      aria-label="Source node"
-    >
+    <article style={nodeStyles} aria-label="Source node">
+      <Handle type="source" position={Position.Right} style={handleStyles} />
       <header>
-        <h3 style={headingStyles}>{children}</h3>
+        <h3 style={headingStyles}>Source</h3>
       </header>
-      <div style={inputStyles} aria-hidden="true" />
-      <span style={handleStyles} aria-hidden="true" />
+      <input style={inputStyles} placeholder="Type…" />
     </article>
   );
 }
 
-export { SourceNode };
+export { SourceFlowNode };
