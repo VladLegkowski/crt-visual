@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# Run TypeScript type-check project-wide first
+# This is done outside lint-staged to avoid TS17004 and TS1056 errors
+# that occur when tsc ignores tsconfig.json when files are passed directly
+echo "Running TypeScript type-check..."
+npx tsc --noEmit || exit 1
+
+# Run lint-staged for ESLint, Prettier, and related tests
+echo "Running lint-staged..."
+npx lint-staged
