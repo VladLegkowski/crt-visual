@@ -1,7 +1,5 @@
-import { ReactFlowProvider } from '@xyflow/react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app/app';
-import { DnDProvider } from './shared/context/dnd-context';
 
 const container = document.querySelector('#root');
 if (!container) {
@@ -9,10 +7,4 @@ if (!container) {
 }
 
 const root = createRoot(container);
-root.render(
-  <ReactFlowProvider>
-    <DnDProvider>
-      <App />
-    </DnDProvider>
-  </ReactFlowProvider>
-);
+root.render(<App />);

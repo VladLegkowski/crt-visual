@@ -16,16 +16,17 @@ import { SourceFlowNode } from '../enteties/nodes/flow/source-flow-node';
 import { LayerNode } from '../enteties/nodes/aside/layer-node';
 import { SourceNode } from '../enteties/nodes/aside/source-node';
 import { DraggableNode } from '../feature/draggable-node/draggable-node';
+import { withProviders } from '../providers/with-providers';
 import { useDnD } from '../shared/context/dnd-context';
 import { SidePanel } from '../shared/ui/side-panel/side-panel';
 
-export function App() {
+function AppContent() {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const { screenToFlowPosition } = useReactFlow();
   const { type, setType } = useDnD();
-  
+
   const nodeTypes = useMemo(
     () => ({
       source: SourceFlowNode,
@@ -58,7 +59,7 @@ export function App() {
         x: event.clientX,
         y: event.clientY,
       });
-      
+
       const newNode = {
         id: getId(),
         type,
@@ -70,7 +71,7 @@ export function App() {
     },
     [screenToFlowPosition, setNodes, type]
   );
-  
+
   const onDragStart = (event: ReactDragEvent<HTMLDivElement>) => {
     setType(type);
     if (type != null) {
@@ -78,14 +79,14 @@ export function App() {
     }
     event.dataTransfer.effectAllowed = 'move';
   };
-  
+
   const appStyles: CSSProperties = {
     display: 'flex',
   };
-  
+
   const mainStyles: CSSProperties = {
-    width: '100%'
-  }
+    width: '100%',
+  };
 
   return (
     <div style={appStyles}>
@@ -116,4 +117,10 @@ export function App() {
       </main>
     </div>
   );
+}
+
+const AppWithProviders = withProviders(() => <AppContent />);
+
+export function App() {
+  return AppWithProviders();
 }
