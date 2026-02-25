@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 echo "Running all quality checks (typecheck, lint, test, e2e)..."
-#npm run check:all || exit 1
+npm run check:all || exit 1
 echo "All checks passed! Pushing..."
