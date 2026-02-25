@@ -3,7 +3,6 @@ import { Handle, type NodeProps, Position } from '@xyflow/react';
 
 function SourceFlowNode(props: NodeProps) {
   const { selected } = props;
-  console.log(props);
   const nodeStyles: CSSProperties = {
     position: 'relative',
     width: 160,
