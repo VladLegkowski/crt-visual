@@ -45,7 +45,7 @@ function SourceFlowNode(props: NodeProps) {
       <header>
         <h3 style={headingStyles}>Source</h3>
       </header>
-      <input style={inputStyles} placeholder="Type…" />
+      <input name="url" style={inputStyles} placeholder="Type…" />
     </article>
   );
 }
